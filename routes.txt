@@ -1,0 +1,242 @@
+     welcome_index GET /welcome/index(.:format)             welcome#index
+    wizard_welcome GET /welcome/wizard(.:format)            welcome#wizard
+wizard_bar_welcome GET /welcome/wizard_bar(.:format)        welcome#wizard_bar
+              root     /                                    welcome#index
+               cms     /cms                                 Cms::Engine
+                       /attachments/:id/:filename(.:format) cms/attachments#download
+                       /                                    cms/content#show
+                       /*path(.:format)                     cms/content#show
+
+Routes for Cms::Engine:
+                     dashboard        /dashboard(.:format)                                        cms/dashboard#index
+                          home        /                                                           cms/home#index
+                       sitemap        /sitemap(.:format)                                          cms/section_nodes#index
+               content_library        /content_library(.:format)                                  cms/html_blocks#index
+                administration        /administration(.:format)                                   cms/users#index
+                        logout        /logout(.:format)                                           cms/sessions#destroy
+                         login GET    /login(.:format)                                            cms/sessions#new
+                               POST   /login(.:format)                                            cms/sessions#create
+                       toolbar        /toolbar(.:format)                                          cms/toolbar#index
+                 content_types        /content_types(.:format)                                    cms/content_types#index
+             move_up_connector PUT    /connectors/:id/move_up(.:format)                           cms/connectors#move_up
+           move_down_connector PUT    /connectors/:id/move_down(.:format)                         cms/connectors#move_down
+      move_to_bottom_connector PUT    /connectors/:id/move_to_bottom(.:format)                    cms/connectors#move_to_bottom
+         move_to_top_connector PUT    /connectors/:id/move_to_top(.:format)                       cms/connectors#move_to_top
+                    connectors GET    /connectors(.:format)                                       cms/connectors#index
+                               POST   /connectors(.:format)                                       cms/connectors#create
+                 new_connector GET    /connectors/new(.:format)                                   cms/connectors#new
+                edit_connector GET    /connectors/:id/edit(.:format)                              cms/connectors#edit
+                     connector GET    /connectors/:id(.:format)                                   cms/connectors#show
+                               PUT    /connectors/:id(.:format)                                   cms/connectors#update
+                               DELETE /connectors/:id(.:format)                                   cms/connectors#destroy
+                         links GET    /links(.:format)                                            cms/links#index
+                               POST   /links(.:format)                                            cms/links#create
+                      new_link GET    /links/new(.:format)                                        cms/links#new
+                     edit_link GET    /links/:id/edit(.:format)                                   cms/links#edit
+                          link GET    /links/:id(.:format)                                        cms/links#show
+                               PUT    /links/:id(.:format)                                        cms/links#update
+                               DELETE /links/:id(.:format)                                        cms/links#destroy
+                  archive_page PUT    /pages/:id/archive(.:format)                                cms/pages#archive
+                     hide_page PUT    /pages/:id/hide(.:format)                                   cms/pages#hide
+                  publish_page PUT    /pages/:id/publish(.:format)                                cms/pages#publish
+                 versions_page GET    /pages/:id/versions(.:format)                               cms/pages#versions
+                 publish_pages PUT    /pages/publish(.:format)                                    cms/pages#publish
+                    page_tasks GET    /pages/:page_id/tasks(.:format)                             cms/tasks#index
+                               POST   /pages/:page_id/tasks(.:format)                             cms/tasks#create
+                 new_page_task GET    /pages/:page_id/tasks/new(.:format)                         cms/tasks#new
+                edit_page_task GET    /pages/:page_id/tasks/:id/edit(.:format)                    cms/tasks#edit
+                     page_task GET    /pages/:page_id/tasks/:id(.:format)                         cms/tasks#show
+                               PUT    /pages/:page_id/tasks/:id(.:format)                         cms/tasks#update
+                               DELETE /pages/:page_id/tasks/:id(.:format)                         cms/tasks#destroy
+                         pages GET    /pages(.:format)                                            cms/pages#index
+                               POST   /pages(.:format)                                            cms/pages#create
+                      new_page GET    /pages/new(.:format)                                        cms/pages#new
+                     edit_page GET    /pages/:id/edit(.:format)                                   cms/pages#edit
+                          page GET    /pages/:id(.:format)                                        cms/pages#show
+                               PUT    /pages/:id(.:format)                                        cms/pages#update
+                               DELETE /pages/:id(.:format)                                        cms/pages#destroy
+              version_cms_page GET    /pages/:id/version/:version(.:format)                       cms/pages#version
+                   revert_page PUT    /pages/:id/revert_to/:version(.:format)                     cms/pages#revert_to
+                 complete_task PUT    /tasks/:id/complete(.:format)                               cms/tasks#complete
+                complete_tasks PUT    /tasks/complete(.:format)                                   cms/tasks#complete
+                         tasks GET    /tasks(.:format)                                            cms/tasks#index
+                               POST   /tasks(.:format)                                            cms/tasks#create
+                      new_task GET    /tasks/new(.:format)                                        cms/tasks#new
+                     edit_task GET    /tasks/:id/edit(.:format)                                   cms/tasks#edit
+                          task GET    /tasks/:id(.:format)                                        cms/tasks#show
+                               PUT    /tasks/:id(.:format)                                        cms/tasks#update
+                               DELETE /tasks/:id(.:format)                                        cms/tasks#destroy
+                 section_links GET    /sections/:section_id/links(.:format)                       cms/links#index
+                               POST   /sections/:section_id/links(.:format)                       cms/links#create
+              new_section_link GET    /sections/:section_id/links/new(.:format)                   cms/links#new
+             edit_section_link GET    /sections/:section_id/links/:id/edit(.:format)              cms/links#edit
+                  section_link GET    /sections/:section_id/links/:id(.:format)                   cms/links#show
+                               PUT    /sections/:section_id/links/:id(.:format)                   cms/links#update
+                               DELETE /sections/:section_id/links/:id(.:format)                   cms/links#destroy
+                 section_pages GET    /sections/:section_id/pages(.:format)                       cms/pages#index
+                               POST   /sections/:section_id/pages(.:format)                       cms/pages#create
+              new_section_page GET    /sections/:section_id/pages/new(.:format)                   cms/pages#new
+             edit_section_page GET    /sections/:section_id/pages/:id/edit(.:format)              cms/pages#edit
+                  section_page GET    /sections/:section_id/pages/:id(.:format)                   cms/pages#show
+                               PUT    /sections/:section_id/pages/:id(.:format)                   cms/pages#update
+                               DELETE /sections/:section_id/pages/:id(.:format)                   cms/pages#destroy
+                      sections GET    /sections(.:format)                                         cms/sections#index
+                               POST   /sections(.:format)                                         cms/sections#create
+                   new_section GET    /sections/new(.:format)                                     cms/sections#new
+                  edit_section GET    /sections/:id/edit(.:format)                                cms/sections#edit
+                       section GET    /sections/:id(.:format)                                     cms/sections#show
+                               PUT    /sections/:id(.:format)                                     cms/sections#update
+                               DELETE /sections/:id(.:format)                                     cms/sections#destroy
+      move_before_section_node PUT    /section_nodes/:id/move_before(.:format)                    cms/section_nodes#move_before
+       move_after_section_node PUT    /section_nodes/:id/move_after(.:format)                     cms/section_nodes#move_after
+move_to_beginning_section_node PUT    /section_nodes/:id/move_to_beginning(.:format)              cms/section_nodes#move_to_beginning
+      move_to_end_section_node PUT    /section_nodes/:id/move_to_end(.:format)                    cms/section_nodes#move_to_end
+     move_to_root_section_node PUT    /section_nodes/:id/move_to_root(.:format)                   cms/section_nodes#move_to_root
+                 section_nodes GET    /section_nodes(.:format)                                    cms/section_nodes#index
+                               POST   /section_nodes(.:format)                                    cms/section_nodes#create
+              new_section_node GET    /section_nodes/new(.:format)                                cms/section_nodes#new
+             edit_section_node GET    /section_nodes/:id/edit(.:format)                           cms/section_nodes#edit
+                  section_node GET    /section_nodes/:id(.:format)                                cms/section_nodes#show
+                               PUT    /section_nodes/:id(.:format)                                cms/section_nodes#update
+                               DELETE /section_nodes/:id(.:format)                                cms/section_nodes#destroy
+                   attachments POST   /attachments(.:format)                                      cms/attachments#create
+                    attachment GET    /attachments/:id(.:format)                                  cms/attachments#show
+                               DELETE /attachments/:id(.:format)                                  cms/attachments#destroy
+               content_library        /content_library(.:format)                                  cms/html_blocks#index
+            publish_html_block PUT    /html_blocks/:id/publish(.:format)                          cms/html_blocks#publish
+           versions_html_block GET    /html_blocks/:id/versions(.:format)                         cms/html_blocks#versions
+             usages_html_block GET    /html_blocks/:id/usages(.:format)                           cms/html_blocks#usages
+                   html_blocks GET    /html_blocks(.:format)                                      cms/html_blocks#index
+                               POST   /html_blocks(.:format)                                      cms/html_blocks#create
+                new_html_block GET    /html_blocks/new(.:format)                                  cms/html_blocks#new
+               edit_html_block GET    /html_blocks/:id/edit(.:format)                             cms/html_blocks#edit
+                    html_block GET    /html_blocks/:id(.:format)                                  cms/html_blocks#show
+                               PUT    /html_blocks/:id(.:format)                                  cms/html_blocks#update
+                               DELETE /html_blocks/:id(.:format)                                  cms/html_blocks#destroy
+       version_cms_html_blocks GET    /html_blocks/:id/version/:version(.:format)                 cms/html_blocks#version
+     revert_to_cms_html_blocks PUT    /html_blocks/:id/revert_to/:version(.:format)               cms/html_blocks#revert_to
+                usages_portlet GET    /portlets/:id/usages(.:format)                              cms/portlets#usages
+                      portlets GET    /portlets(.:format)                                         cms/portlets#index
+                               POST   /portlets(.:format)                                         cms/portlets#create
+                   new_portlet GET    /portlets/new(.:format)                                     cms/portlets#new
+                  edit_portlet GET    /portlets/:id/edit(.:format)                                cms/portlets#edit
+                       portlet GET    /portlets/:id(.:format)                                     cms/portlets#show
+                               PUT    /portlets/:id(.:format)                                     cms/portlets#update
+                               DELETE /portlets/:id(.:format)                                     cms/portlets#destroy
+               portlet_handler POST   /portlet/:id/:handler(.:format)                             cms/portlet#execute_handler
+            publish_file_block PUT    /file_blocks/:id/publish(.:format)                          cms/file_blocks#publish
+           versions_file_block GET    /file_blocks/:id/versions(.:format)                         cms/file_blocks#versions
+             usages_file_block GET    /file_blocks/:id/usages(.:format)                           cms/file_blocks#usages
+                   file_blocks GET    /file_blocks(.:format)                                      cms/file_blocks#index
+                               POST   /file_blocks(.:format)                                      cms/file_blocks#create
+                new_file_block GET    /file_blocks/new(.:format)                                  cms/file_blocks#new
+               edit_file_block GET    /file_blocks/:id/edit(.:format)                             cms/file_blocks#edit
+                    file_block GET    /file_blocks/:id(.:format)                                  cms/file_blocks#show
+                               PUT    /file_blocks/:id(.:format)                                  cms/file_blocks#update
+                               DELETE /file_blocks/:id(.:format)                                  cms/file_blocks#destroy
+       version_cms_file_blocks GET    /file_blocks/:id/version/:version(.:format)                 cms/file_blocks#version
+     revert_to_cms_file_blocks PUT    /file_blocks/:id/revert_to/:version(.:format)               cms/file_blocks#revert_to
+           publish_image_block PUT    /image_blocks/:id/publish(.:format)                         cms/image_blocks#publish
+          versions_image_block GET    /image_blocks/:id/versions(.:format)                        cms/image_blocks#versions
+            usages_image_block GET    /image_blocks/:id/usages(.:format)                          cms/image_blocks#usages
+                  image_blocks GET    /image_blocks(.:format)                                     cms/image_blocks#index
+                               POST   /image_blocks(.:format)                                     cms/image_blocks#create
+               new_image_block GET    /image_blocks/new(.:format)                                 cms/image_blocks#new
+              edit_image_block GET    /image_blocks/:id/edit(.:format)                            cms/image_blocks#edit
+                   image_block GET    /image_blocks/:id(.:format)                                 cms/image_blocks#show
+                               PUT    /image_blocks/:id(.:format)                                 cms/image_blocks#update
+                               DELETE /image_blocks/:id(.:format)                                 cms/image_blocks#destroy
+      version_cms_image_blocks GET    /image_blocks/:id/version/:version(.:format)                cms/image_blocks#version
+    revert_to_cms_image_blocks PUT    /image_blocks/:id/revert_to/:version(.:format)              cms/image_blocks#revert_to
+                category_types GET    /category_types(.:format)                                   cms/category_types#index
+                               POST   /category_types(.:format)                                   cms/category_types#create
+             new_category_type GET    /category_types/new(.:format)                               cms/category_types#new
+            edit_category_type GET    /category_types/:id/edit(.:format)                          cms/category_types#edit
+                 category_type GET    /category_types/:id(.:format)                               cms/category_types#show
+                               PUT    /category_types/:id(.:format)                               cms/category_types#update
+                               DELETE /category_types/:id(.:format)                               cms/category_types#destroy
+                    categories GET    /categories(.:format)                                       cms/categories#index
+                               POST   /categories(.:format)                                       cms/categories#create
+                  new_category GET    /categories/new(.:format)                                   cms/categories#new
+                 edit_category GET    /categories/:id/edit(.:format)                              cms/categories#edit
+                      category GET    /categories/:id(.:format)                                   cms/categories#show
+                               PUT    /categories/:id(.:format)                                   cms/categories#update
+                               DELETE /categories/:id(.:format)                                   cms/categories#destroy
+                          tags GET    /tags(.:format)                                             cms/tags#index
+                               POST   /tags(.:format)                                             cms/tags#create
+                       new_tag GET    /tags/new(.:format)                                         cms/tags#new
+                      edit_tag GET    /tags/:id/edit(.:format)                                    cms/tags#edit
+                           tag GET    /tags/:id(.:format)                                         cms/tags#show
+                               PUT    /tags/:id(.:format)                                         cms/tags#update
+                               DELETE /tags/:id(.:format)                                         cms/tags#destroy
+                administration        /administration(.:format)                                   cms/users#index
+          change_password_user GET    /users/:id/change_password(.:format)                        cms/users#change_password
+          update_password_user PUT    /users/:id/update_password(.:format)                        cms/users#update_password
+                  disable_user PUT    /users/:id/disable(.:format)                                cms/users#disable
+                   enable_user PUT    /users/:id/enable(.:format)                                 cms/users#enable
+                         users GET    /users(.:format)                                            cms/users#index
+                               POST   /users(.:format)                                            cms/users#create
+                      new_user GET    /users/new(.:format)                                        cms/users#new
+                     edit_user GET    /users/:id/edit(.:format)                                   cms/users#edit
+                          user GET    /users/:id(.:format)                                        cms/users#show
+                               PUT    /users/:id(.:format)                                        cms/users#update
+                               DELETE /users/:id(.:format)                                        cms/users#destroy
+                email_messages GET    /email_messages(.:format)                                   cms/email_messages#index
+                               POST   /email_messages(.:format)                                   cms/email_messages#create
+             new_email_message GET    /email_messages/new(.:format)                               cms/email_messages#new
+            edit_email_message GET    /email_messages/:id/edit(.:format)                          cms/email_messages#edit
+                 email_message GET    /email_messages/:id(.:format)                               cms/email_messages#show
+                               PUT    /email_messages/:id(.:format)                               cms/email_messages#update
+                               DELETE /email_messages/:id(.:format)                               cms/email_messages#destroy
+                        groups GET    /groups(.:format)                                           cms/groups#index
+                               POST   /groups(.:format)                                           cms/groups#create
+                     new_group GET    /groups/new(.:format)                                       cms/groups#new
+                    edit_group GET    /groups/:id/edit(.:format)                                  cms/groups#edit
+                         group GET    /groups/:id(.:format)                                       cms/groups#show
+                               PUT    /groups/:id(.:format)                                       cms/groups#update
+                               DELETE /groups/:id(.:format)                                       cms/groups#destroy
+                     redirects GET    /redirects(.:format)                                        cms/redirects#index
+                               POST   /redirects(.:format)                                        cms/redirects#create
+                  new_redirect GET    /redirects/new(.:format)                                    cms/redirects#new
+                 edit_redirect GET    /redirects/:id/edit(.:format)                               cms/redirects#edit
+                      redirect GET    /redirects/:id(.:format)                                    cms/redirects#show
+                               PUT    /redirects/:id(.:format)                                    cms/redirects#update
+                               DELETE /redirects/:id(.:format)                                    cms/redirects#destroy
+                 page_partials GET    /page_partials(.:format)                                    cms/dynamic_views#index
+                               POST   /page_partials(.:format)                                    cms/dynamic_views#create
+              new_page_partial GET    /page_partials/new(.:format)                                cms/dynamic_views#new
+             edit_page_partial GET    /page_partials/:id/edit(.:format)                           cms/dynamic_views#edit
+                  page_partial GET    /page_partials/:id(.:format)                                cms/dynamic_views#show
+                               PUT    /page_partials/:id(.:format)                                cms/dynamic_views#update
+                               DELETE /page_partials/:id(.:format)                                cms/dynamic_views#destroy
+                page_templates GET    /page_templates(.:format)                                   cms/dynamic_views#index
+                               POST   /page_templates(.:format)                                   cms/dynamic_views#create
+             new_page_template GET    /page_templates/new(.:format)                               cms/dynamic_views#new
+            edit_page_template GET    /page_templates/:id/edit(.:format)                          cms/dynamic_views#edit
+                 page_template GET    /page_templates/:id(.:format)                               cms/dynamic_views#show
+                               PUT    /page_templates/:id(.:format)                               cms/dynamic_views#update
+                               DELETE /page_templates/:id(.:format)                               cms/dynamic_views#destroy
+         page_route_conditions GET    /page_routes/:page_route_id/conditions(.:format)            cms/page_route_conditions#index
+                               POST   /page_routes/:page_route_id/conditions(.:format)            cms/page_route_conditions#create
+      new_page_route_condition GET    /page_routes/:page_route_id/conditions/new(.:format)        cms/page_route_conditions#new
+     edit_page_route_condition GET    /page_routes/:page_route_id/conditions/:id/edit(.:format)   cms/page_route_conditions#edit
+          page_route_condition GET    /page_routes/:page_route_id/conditions/:id(.:format)        cms/page_route_conditions#show
+                               PUT    /page_routes/:page_route_id/conditions/:id(.:format)        cms/page_route_conditions#update
+                               DELETE /page_routes/:page_route_id/conditions/:id(.:format)        cms/page_route_conditions#destroy
+       page_route_requirements GET    /page_routes/:page_route_id/requirements(.:format)          cms/page_route_requirements#index
+                               POST   /page_routes/:page_route_id/requirements(.:format)          cms/page_route_requirements#create
+    new_page_route_requirement GET    /page_routes/:page_route_id/requirements/new(.:format)      cms/page_route_requirements#new
+   edit_page_route_requirement GET    /page_routes/:page_route_id/requirements/:id/edit(.:format) cms/page_route_requirements#edit
+        page_route_requirement GET    /page_routes/:page_route_id/requirements/:id(.:format)      cms/page_route_requirements#show
+                               PUT    /page_routes/:page_route_id/requirements/:id(.:format)      cms/page_route_requirements#update
+                               DELETE /page_routes/:page_route_id/requirements/:id(.:format)      cms/page_route_requirements#destroy
+                   page_routes GET    /page_routes(.:format)                                      cms/page_routes#index
+                               POST   /page_routes(.:format)                                      cms/page_routes#create
+                new_page_route GET    /page_routes/new(.:format)                                  cms/page_routes#new
+               edit_page_route GET    /page_routes/:id/edit(.:format)                             cms/page_routes#edit
+                    page_route GET    /page_routes/:id(.:format)                                  cms/page_routes#show
+                               PUT    /page_routes/:id(.:format)                                  cms/page_routes#update
+                               DELETE /page_routes/:id(.:format)                                  cms/page_routes#destroy
+                         cache GET    /cache(.:format)                                            cms/cache#show
+                               DELETE /cache(.:format)                                            cms/cache#destroy
+                        routes        /routes(.:format)                                           cms/routes#index
